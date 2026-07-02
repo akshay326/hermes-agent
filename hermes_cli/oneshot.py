@@ -336,6 +336,14 @@ def _run_agent(
     # Read the effective fallback chain from profile config so oneshot workers
     # honour the same merge semantics as interactive CLI and gateway sessions.
     _fb = get_fallback_chain(cfg)
+    # Wait for background MCP tool discovery to complete before building the
+    # agent — without this, HTTP-transport MCP servers (e.g. Composio) that
+    # take >1.5s to connect are missing from the tool list.
+    try:
+        from hermes_cli.mcp_startup import wait_for_mcp_discovery
+        wait_for_mcp_discovery(timeout=30)
+    except Exception:
+        pass
 
     agent = AIAgent(
         api_key=runtime.get("api_key"),
