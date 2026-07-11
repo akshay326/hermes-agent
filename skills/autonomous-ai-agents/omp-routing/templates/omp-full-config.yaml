@@ -1,0 +1,33 @@
+# OMP Full Config — Copy-paste to ~/.hermes/config.yaml
+#
+# 3-model architecture:
+#   - MiMo V2.5 (executor): tool calls, implementation, code execution
+#   - GLM 5.2 (planner): deep reasoning, strategy, architecture decisions
+#   - Gemini 2.5 Flash (vision): PDFs, images, diagrams, handwriting
+#
+# Compression keeps context under 100k tokens (50% of MiMo's 200k limit)
+# to avoid the 40-50% degradation cliff identified in research.
+#
+# After applying: /reset in-session or restart gateway.
+# Verify with: /model, /config, /status
+
+model:
+  default: mimo-v2.5
+  provider: opencode-go
+
+delegation:
+  model: glm-5.2
+  provider: opencode-go
+  reasoning_effort: high
+
+auxiliary:
+  vision:
+    provider: openrouter
+    model: google/gemini-2.5-flash
+
+compression:
+  enabled: true
+  threshold: 0.50
+  threshold_tokens: 100000
+  target_ratio: 0.25
+  protect_last_n: 20

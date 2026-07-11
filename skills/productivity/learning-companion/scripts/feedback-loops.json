@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "created": "2026-07-09T22:58:07.721Z",
+  "metrics": {
+    "total_nudges": 9,
+    "nudges_responded": 0,
+    "prior_updates_detected": 0,
+    "feedback_loop_rate": 0,
+    "weekly": {
+      "2026-W28": {
+        "nudges": 9,
+        "responses": 0,
+        "prior_updates": 0
+      }
+    }
+  },
+  "nudges": [
+    {
+      "id": "nudge-1783637887721",
+      "type": "prediction",
+      "text": "also suest 32 which is a good number so this is an embedding table and only 32 dimensional embeddings so then here this is not going to give us logits directly instead this is going to give us token e",
+      "book": "Unknown",
+      "created_at": "2026-07-09T22:58:07.721Z",
+      "responded": false,
+      "prior_updated": false
+    },
+    {
+      "id": "nudge-1783637899733",
+      "type": "connection",
+      "text": "sampling these chunks of text we're going to be actually every time we're going to feed them into a Transformer we're going to have many batches of multiple chunks of text that are all like stacked up",
+      "book": "Unknown",
+      "created_at": "2026-07-09T22:58:19.733Z",
+      "responded": false,
+      "prior_updated": false
+    },
+    {
+      "id": "nudge-1783637908506",
+      "type": "confusion",
+      "text": "so vertical average just averaging up all the tokens now gives this outcome here so this is all well and good uh but this is very inefficient now the trick is that we can be very very efficient about ",
+      "book": "Unknown",
+      "created_at": "2026-07-09T22:58:28.506Z",
+      "responded": false,
+      "prior_updated": false
+    },
+    {
+      "id": "nudge-1783637923971",
+      "type": "insight",
+      "text": "given the previous context of whatever was generated we're only looking at the very last character to make the predictions about what comes next so now these uh now these tokens have to start talking ",
+      "book": "Unknown",
+      "created_at": "2026-07-09T22:58:43.971Z",
+      "responded": false,
+      "prior_updated": false
+    },
+    {
+      "id": "nudge-1783646144209",
+      "type": "insight",
+      "text": "fine-tuning so this actually somehow works but that's just step one that's just fine tuning so then they actually have more steps where okay the second step is you let the model respond and then diffe",
+      "book": "Unknown",
+      "created_at": "2026-07-10T01:15:44.209Z",
+      "responded": false,
+      "prior_updated": false
+    },
+    {
+      "id": "nudge-1783710950188",
+      "type": "connection",
+      "text": "in\n\nfact in many cases you may want to have all of the uh noes talk to each other uh fully so as an example if you're doing sentiment analysis or something like that with a Transformer",
+      "book": "Unknown",
+      "created_at": "2026-07-10T19:15:50.188Z",
+      "responded": false,
+      "prior_updated": false
+    },
+    {
+      "id": "nudge-1783711048109",
+      "type": "connection",
+      "text": "sampling these chunks of text we're going to be actually every time we're going to feed them into a Transformer we're going to have many batches of multiple chunks of text that are all like stacked up",
+      "book": "Unknown",
+      "created_at": "2026-07-10T19:17:28.109Z",
+      "responded": false,
+      "prior_updated": false
+    },
+    {
+      "id": "nudge-1783717257300",
+      "type": "confusion",
+      "text": "aggregate we produce one more value here and we call that the value so in the same way that we produced p and query we're also going to create a value and then here we don't\n\naggregate X we calculate ",
+      "book": "Unknown",
+      "created_at": "2026-07-10T21:00:57.300Z",
+      "responded": false,
+      "prior_updated": false
+    },
+    {
+      "id": "nudge-1783723266279",
+      "type": "confusion",
+      "text": "in\n\nfact in many cases you may want to have all of the uh noes talk to each other uh fully so as an example if you're doing sentiment analysis or something like that with a Transformer",
+      "book": "Unknown",
+      "created_at": "2026-07-10T22:41:06.279Z",
+      "responded": false,
+      "prior_updated": false
+    }
+  ],
+  "prior_updates": []
+}

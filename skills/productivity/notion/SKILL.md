@@ -431,11 +431,22 @@ Headings 5/6 collapse to H4. Multiple `>` lines render as separate quote blocks 
 
 | Task | mac / Linux | Windows |
 |---|---|---|
-| Read/write pages, search, query databases | `ntn api ...` | curl |
-| Read a page for an agent to summarize | `ntn api v1/pages/{id}/markdown` | curl `/markdown` endpoint |
-| Upload a file | `ntn files create < file` | 3-step HTTP flow |
-| One-off API exploration | `ntn api ...` | curl |
+| Read/write pages, search, query databases | `ntn api ...` or curl | curl |
+| Read a page for an agent to summarize | `ntn api v1/pages/{id}/markdown` or curl `/markdown` endpoint | curl `/markdown` endpoint |
+| Upload a file | `ntn files create < file` or 3-step HTTP flow | 3-step HTTP flow |
+| One-off API exploration | `ntn api ...` or curl | curl |
 | Build a sync / webhook / agent tool hosted by Notion | `ntn workers ...` | WSL2 + `ntn workers ...` |
+
+## ⚠️ Mandatory Pre-Write Checklist
+
+**BEFORE any Notion write (create page, create database, add to database):**
+
+1. **Load `notion-guardrails` skill** — it has the canonical database inventory with exact IDs.
+2. **Check the inventory** — if a database for this purpose exists, USE IT. Never create new databases.
+3. **Use the exact database ID from the inventory.** Don't search, don't guess, don't fabricate IDs.
+4. **If no match exists — ASK THE USER** before creating anything new.
+
+This prevents: duplicate databases, wrong database selection, wasted time searching.
 
 ## Notes
 

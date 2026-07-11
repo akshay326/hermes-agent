@@ -729,6 +729,7 @@ the `cronjob` tool, the `hermes cron` CLI (`list`, `add`, `edit`,
 
 - **Schedules:** duration (`"30m"`, `"2h"`), "every" phrase
   (`"every monday 9am"`), 5-field cron (`"0 9 * * *"`), or ISO timestamp.
+- **Timezone:** All cron schedules use **PST/PDT (Pacific Time)**. The system runs in UTC, so convert PT times to UTC for the scheduler. **PDT (Mar-Nov): UTC = PT + 7. PST (Nov-Mar): UTC = PT + 8.** Examples: 7 AM PDT = 14:00 UTC, 8 AM PDT = 15:00 UTC, 7 PM PDT = 02:00 UTC next day. CRITICAL: The user is in PDT (UTC-7) — always confirm the converted UTC time makes sense in Pacific Time before committing.
 - **Per-job knobs:** `skills`, `model`/`provider` override, `script`
   (pre-run data collection; `no_agent=True` makes the script the whole
   job), `context_from` (chain job A's output into job B), `workdir`
