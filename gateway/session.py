@@ -9,9 +9,11 @@ Handles:
 """
 
 import asyncio
+from concurrent.futures import ThreadPoolExecutor
 import hashlib
 import logging
 import os
+import time
 import json
 import threading
 import uuid
@@ -1143,6 +1145,11 @@ class _SessionFlight:
 class AsyncSessionStore:
     """Async boundary for the synchronous, thread-safe SessionStore."""
 
+    # Dedicated thread pool for DB offloading — avoids starvation when the
+    # default executor (min(32, cpu_count+4) = 8 threads on 4-core ARM64)
+    # is exhausted by the 20+ sequential await calls per user-message turn.
+    _executor = ThreadPoolExecutor(max_workers=32, thread_name_prefix="hermes-db")
+
     def __init__(self, store: "SessionStore") -> None:
         self._store = store
 
@@ -1152,7 +1159,10 @@ class AsyncSessionStore:
             return attr
 
         async def _offloaded(*args, **kwargs) -> Any:
-            return await asyncio.to_thread(attr, *args, **kwargs)
+            # run_in_executor doesn't forward **kwargs; use a lambda wrapper
+            return await asyncio.get_event_loop().run_in_executor(
+                self._executor, lambda: attr(*args, **kwargs)
+            )
 
         return _offloaded
 
@@ -3066,6 +3076,7 @@ class SessionStore:
                         self._transcript_append_failures.pop(session_id, None)
                         return
                     msg = pending[0]
+                time.sleep(0.01)  # Yield to event loop; prevent tight spin
                 continue
 
     def _append_transcript_message(self, session_id: str, message: Dict[str, Any]) -> None:
